@@ -1,3 +1,13 @@
 remote_theme: "mmistakes/so-simple-theme@3.2.0"
 title: Patrick's Blog
 description: Electronics Titbits
+
+author:
+  name: Patrick W.
+  #picture:
+  #email:
+  #twitter:
+  links:
+    - title: GitHub
+      url: https://github.com/p-j-ward
+      icon: fab fa-github-square
