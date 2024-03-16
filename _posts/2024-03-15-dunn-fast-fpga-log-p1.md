@@ -6,16 +6,24 @@ tags: fpga maths
 
 While searching for a way to take logs on an FPGA (without resorting to the sledgehammer of CORDIC) I stumbled upon Micheal Dunn's [Single-cycle logarithms & antilogs](https://www.edn.com/single-cycle-logarithms-antilogs/) article in EDN. His method is a clever extention of the mathematician's approximation: to take the log (base 10), just count the digits. In binary we can get the log (base 2) by "counting the digits" with a priority encoder—which outputs the position of the highest nonzero bit.
 
-This bit-counting is pretty cheap, and gives us the integer part of the log. Next is is the clever bit: we can get the fractional part by left-aligning the input with a barrel shifter (by left shifting the input by the binary not of the integer part) then feeding that into a LUT (???). How on earth that works (and besides... what goes in the LUT?) is what I want to analyse here, as it falls quite neatly out of some simple algebra, with a few tricks.
+This bit-counting is pretty cheap, and gives us the _integer_ part of the log. Next is is the clever bit: we can get the _fractional_ part by left-aligning the input with a barrel shifter (by left shifting the input by the binary not of the integer part) then feeding that into a LUT (???). How on earth that works (and besides... what goes in the LUT?) is what I want to analyse here, as it falls quite neatly out of some simple algebra, with a few tricks.
 
 (TODO: add diagram here)
 
-To work out the behaviour mathematically, first consider the priority encoder output $$P_o$$, which is the floor of the log (base 2). The floor $$\lfloor a \rfloor$$ is simply $$a - \{a\}$$ where $$\{a\}$$ denotes the fractional part of $$a$$, thus for input value $$x$$:
+To work out the behaviour mathematically, first consider the priority encoder output $$P_o$$, which is the floor of the log of the input. The floor $$\lfloor a \rfloor$$ is simply $$a - \{a\}$$ where $$\{a\}$$ denotes the fractional part of $$a$$, thus for input value $$x$$:
 
 $$ P_o = \lfloor \log_{2}x \rfloor = \log_{2}x - \{\log_{2}x\} $$
 
-$$P_o$$ feeds straight to the output as the integer part of the log, but before feeding it into the barrel shifter we not it's bits. Why we have to do this will be apparent soon—we need to flip the signs of the terms in $$P_o$$ to get some cancellation. For now, note that the binary not $$\overline{b}$$ of the bits of a number $$b$$ means for inputs counting up ...000, ...001, ...010 we'll now be counting down ...111, ...110, ...101. That is to say $$\overline{b} = (2^N - 1) - b$$, where $$N$$ is the bit-width of $$b$$ (and thus $$2^N - 1$$) its maximum possible value).
+$$P_o$$ feeds straight to the output as the integer part, but before feeding it into the barrel shifter we not its bits. Why we have to do this will be apparent soon—we need to flip the signs of the terms in $$P_o$$ to get some cancellation. For now, note that the binary not $$\overline{b}$$ of the bits of a number $$b$$ means for inputs counting up ...000, ...001, ...010 we'll now be counting down ...111, ...110, ...101. That is to say $$\overline{b} = (2^N - 1) - b$$, where $$N$$ is the bit-width of $$b$$ (and thus $$2^N - 1$$ its maximum possible value).
 
 We can now write the equation for the output of the barrel shifter $$B_o$$:
 
-$$B_o = x << \overline{P_o} = $$
+$$ B_o = x << \overline{P_o} = x << (2^N - 1 - P_o) $$
+
+As left-shifting is exponentiation, we have:
+
+$$ B_o = x \cdot 2^{(2^N - 1 - P_o)} = x \cdot \frac{2^{(2^N - 1)}}{2^P_o} $$
+
+We can substitute in $$P_o$$, and nicely cancel out the $$x$$:
+
+$$ B_o = x \cdot \frac{2^{(2^N - 1)}}{2^P_o} = x \cdot \frac{2^{(2^N - 1)}}{2^{\log_{2}x - \{\log_{2}x\}}} = 2^{(2^N - 1)} \cdot 2^{ \{\log_{2}x\} }$$
