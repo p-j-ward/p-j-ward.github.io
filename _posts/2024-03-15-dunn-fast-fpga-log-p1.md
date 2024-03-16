@@ -24,6 +24,12 @@ As left-shifting is exponentiation, we have:
 
 $$ B_o = x \cdot 2^{(2^N - 1 - P_o)} = x \cdot \frac{2^{(2^N - 1)}}{2^P_o} $$
 
-We can substitute in $$P_o$$, and nicely cancel out the $$x$$:
+We can substitute in $$P_o$$ and nicely cancel out the $$x$$:
 
 $$ B_o = x \cdot \frac{2^{(2^N - 1)}}{2^{P_o}} = x \cdot \frac{2^{(2^N - 1)}}{2^{(\log_{2}x - \{\log_{2}x\})}} = 2^{(2^N - 1)} \cdot 2^{ \{\log_{2}x\} }$$
+
+Now just take the log of both sides, and rearrange for $$\{\log_{2}x\}$$ (this is what we're trying to find):
+
+$$ \log_{2}B_o = (2^N - 1) + \{\log_{2}x\}$$
+
+$$ \{\log_{2}x\} = \log_{2}B_o - (2^N - 1) $$
