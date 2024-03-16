@@ -14,8 +14,8 @@ To work out the behaviour mathematically, first consider the priority encoder ou
 
 $$ P_o = \lfloor \log_{2}x \rfloor = \log_{2}x - \{\log_{2}x\} $$
 
-$$P_o$$ feeds straight to the output as the integer part of the log, but before feeding it into the barrel shifter we not it's bits. Why we have to do this will be apparent soon—we need to flip the signs of the terms in $$P_o$$ to get some cancellation. For now, note that the binary not $$\bar b$$ of the bits of a number $$b$$ means for inputs counting up $$...000$$, $$...001$$, $$...010$$ we'll now be counting down $$...111$$, $$...110$$, $$...101$$. That is to say $$\bar b = (2^N - 1) - b$$, where $$N$$ is $$b$$'s width in bits (and thus $$2^N - 1$$) its maximum possible value).
+$$P_o$$ feeds straight to the output as the integer part of the log, but before feeding it into the barrel shifter we not it's bits. Why we have to do this will be apparent soon—we need to flip the signs of the terms in $$P_o$$ to get some cancellation. For now, note that the binary not $$\overline{b}$$ of the bits of a number $$b$$ means for inputs counting up ...000, ...001, ...010 we'll now be counting down ...111, ...110, ...101. That is to say $$\overline{b} = (2^N - 1) - b$$, where $$N$$ is the bit-width of $$b$$ (and thus $$2^N - 1$$) its maximum possible value).
 
 We can now write the equation for the output of the barrel shifter $$B_o$$:
 
-$$B_o = x << \bar P_o = $$
+$$B_o = x << \overline{P_o} = $$
