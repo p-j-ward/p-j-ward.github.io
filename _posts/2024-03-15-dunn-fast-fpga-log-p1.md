@@ -28,8 +28,14 @@ We can substitute in $$P_o$$ and nicely cancel out the $$x$$:
 
 $$ B_o = x \cdot \frac{2^{(2^N - 1)}}{2^{P_o}} = x \cdot \frac{2^{(2^N - 1)}}{2^{(\log_{2}x - \{\log_{2}x\})}} = 2^{(2^N - 1)} \cdot 2^{ \{\log_{2}x\} }$$
 
-Now just take the log of both sides, and rearrange for $$\{\log_{2}x\}$$ (this is what we're trying to find):
+Now just take the log of both sides, and rearrange for $$\{\log_{2}x\}$$:
 
 $$ \log_{2}B_o = (2^N - 1) + \{\log_{2}x\}$$
 
+So now we have the equation for the fractional part $$\{\log_{2}x\}$$ in terms of the barrel shifter output $$B_o$$, which is the equation that the LUT implements:
+
 $$ \{\log_{2}x\} = \log_{2}B_o - (2^N - 1) $$
+
+At first glance it looks like we're right back where we started, as we have to take the log of $$B_o$$, but consider the fact that—by definition—$$\{\log_{2}x\}$$ must be between zero and one, being the fractional part of $$log_{2}x$$. Thus, the value of the right hand side must also lie between zero and one. Let's rearrange it to get:
+
+$$ \{\log_{2}x\} = \log_{2}{frac{B_o}{2^{(2^N - 1)}} = \log_{2}{({B_o >> {(2^N - 1)})} $$
