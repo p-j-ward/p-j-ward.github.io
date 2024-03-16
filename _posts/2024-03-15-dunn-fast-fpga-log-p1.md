@@ -10,6 +10,12 @@ This bit-counting is pretty cheap, and gives us the integer part of the log. Nex
 
 (TODO: add diagram here)
 
-To work out the behaviour mathematically, first consider the priority encoder output $$P_O$$, which is the floor of the log (base 2). The floor $$\lfloor a \rfloor$$ is simply $$a - \{a\}$$ where $$\{a\}$$ denotes the fractional part of $$a$$, thus for input value $$x$$:
+To work out the behaviour mathematically, first consider the priority encoder output $$P_o$$, which is the floor of the log (base 2). The floor $$\lfloor a \rfloor$$ is simply $$a - \{a\}$$ where $$\{a\}$$ denotes the fractional part of $$a$$, thus for input value $$x$$:
 
-$$ P_O = \lfloor \log_{2}x \rfloor = \log_{2}x - \{\log_{2}x\} $$
+$$ P_o = \lfloor \log_{2}x \rfloor = \log_{2}x - \{\log_{2}x\} $$
+
+$$P_o$$ feeds straight to the output as the integer part of the log, but before feeding it into the barrel shifter we not it's bits. Why we have to do this will be apparent soon—we need to flip the signs of the terms in $$P_o$ to get some cancellation. For now, note that the binary not $$\bar b$$ of the bits of a number $$b$$ means for inputs counting up $$...000$$, $$...001$$, $$...010$$ we'll now be counting down $$...111$$, $$...110$$, $$...101$$. That is to say $$\bar b = (2^N - 1) - b$$, where $$N$$ is $$b$$'s width in bits (and thus $$2^N - 1$$) its maximum possible value).
+
+We can now write the equation for the output of the barrel shifter $$B_o$$:
+
+$$B_o = x << \bar P_o = $
