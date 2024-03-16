@@ -10,6 +10,6 @@ This bit-counting is pretty cheap, and gives us the integer part of the log. Nex
 
 (TODO: add diagram here)
 
-To work out the behaviour mathematically, first consider the priority encoder output $$P_O$$, which is the floor of the log (base 2). The floor of $$\lfloor a \rfloor$$ is simply $$a - \{a\}$$ where $$\{a\}$$ denotes the fractional part of $$a$$, thus for input value $$x$$:
+To work out the behaviour mathematically, first consider the priority encoder output $$P_O$$, which is the floor of the log (base 2). The floor $$\lfloor a \rfloor$$ is simply $$a - \{a\}$$ where $$\{a\}$$ denotes the fractional part of $$a$$, thus for input value $$x$$:
 
 $$ P_O = \lfloor \log_{2}x \rfloor = \log_{2}x - \{\log_{2}x\} $$
