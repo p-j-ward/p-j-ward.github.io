@@ -18,4 +18,4 @@ $$P_o$$ feeds straight to the output as the integer part of the log, but before 
 
 We can now write the equation for the output of the barrel shifter $$B_o$$:
 
-$$B_o = x << \bar P_o = $
+$$B_o = x << \bar P_o = $$
