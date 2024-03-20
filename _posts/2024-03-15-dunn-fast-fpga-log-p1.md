@@ -22,7 +22,7 @@ $$ B_o = x << \overline{P_o} = x << (2^N - 1 - P_o) $$
 
 As left-shifting is exponentiation, we have:
 
-$$ B_o = x \cdot 2^{(2^N - 1 - P_o)} = x \cdot \frac{2^{(2^N - 1)}}{2^P_o} $$
+$$ B_o = x \cdot 2^{(2^N - 1 - P_o)} = x \cdot \frac{2^{(2^N - 1)}}{2^{P_o}} $$
 
 We can substitute in $$P_o$$ and nicely cancel out the $$x$$:
 
