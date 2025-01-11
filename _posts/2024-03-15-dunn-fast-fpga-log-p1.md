@@ -32,7 +32,7 @@ This is why we had to bitwise not $$P_o$$ going into the barrel shifter, the not
 
 $$ \log_{2}B_o = (2^N - 1) + \{\log_{2}x\}$$
 
-Thus gives us the equation for the fractional part $$\{\log_{2}x\}$$ in terms of the barrel shifter output $$B_o$$, which is the equation that the LUT implements:
+This gives us the equation for the fractional part $$\{\log_{2}x\}$$ in terms of the barrel shifter output $$B_o$$, which is the equation that the LUT implements:
 
 $$ \{\log_{2}x\} = \log_{2}B_o - (2^N - 1) $$
 
@@ -44,7 +44,7 @@ Recall that $$2^N-1$$ is the maximum possible value of $$P_o$$, that is to say: 
 
 // TODO
 
-As a sanity check, substitute the definition of $$B_o$$, and then $$P_o$$ back in: 
+As a sanity check, substitute the definition of $$B_o$$ and then $$P_o$$ back in: 
 
 $$ \{\log_{2}x\} = \log_{2}(B_o >> (2^N-1)) = \log_{2}((x << (2^N - 1 - P_o)) >> (2^N-1)) $$
 
