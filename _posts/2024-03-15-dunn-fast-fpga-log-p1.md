@@ -32,7 +32,7 @@ This is why we had to bitwise not $$P_o$$ going into the barrel shifter, the not
 
 $$ \log_{2}B_o = (2^N - 1) + \{\log_{2}x\}$$
 
-So now we have the equation for the fractional part $$\{\log_{2}x\}$$ in terms of the barrel shifter output $$B_o$$, which is the equation that the LUT implements:
+Thus gives us the equation for the fractional part $$\{\log_{2}x\}$$ in terms of the barrel shifter output $$B_o$$, which is the equation that the LUT implements:
 
 $$ \{\log_{2}x\} = \log_{2}B_o - (2^N - 1) $$
 
