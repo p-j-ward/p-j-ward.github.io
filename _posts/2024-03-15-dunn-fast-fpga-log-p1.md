@@ -44,3 +44,13 @@ Recall that $$2^N-1$$ is the maximum possible value of $$P_o$$, that is to say: 
 
 // TODO
 
+As a sanity check, substitute the definition of $$B_o$$, and then $$P_o$$ back in: 
+
+$$ \{\log_{2}x\} = \log_{2}(B_o >> (2^N-1)) = \log_{2}((x << (2^N - 1 - P_o)) >> (2^N-1)) $$
+
+$$ \{\log_{2}x\} = \log_{2}(x >> P_o) = \log_{2}(\frac{x}{2^{P_o}}) $$
+
+$$ \{\log_{2}x\} = \log_{2}(x) - P_o = \log_{2}(x) - \lfloor \log_{2}x \rfloor $$
+
+Which is exactly the definition of $$ \{\log_{2}x\} $$, the fractional part of the log.
+
